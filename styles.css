@@ -11,7 +11,7 @@
 
 #calculator{
     background-color: lightcoral;
-    width: 400px;
+    width: 350px;
     padding:50px;
     
 }
@@ -19,25 +19,32 @@
 .button{
     background-color: lightblue;
     font-size: 30px;
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
 }
 
 #calculator-screen{
     background-color: bisque;
     display:flex;
     align-items:end;
-    height: 70px;
+    justify-content: end;
+    height: 90px;
     font-size: 50px;
+    padding:0px 5px;
 }
 
 
 #first-row,
 #second-row,
 #third-row,
-#fourth-row{
+#fourth-row,
+#fifth-row{
     display:flex;
     justify-content: space-between;
+}
+
+#equals{
+    width: 410px;
 }
 
 body {

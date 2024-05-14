@@ -30,12 +30,17 @@ function operate(num1, num2, operator) {
 
 function addEventListenersToButtons() {
 
-    const buttons = document.querySelectorAll(".number-button");
-    const buttonArray = Array.from(buttons);
+    const numButtons = document.querySelectorAll(".number-button");
+    const numButtonArray = Array.from(numButtons);
     const display = document.querySelector("#calculator-screen");
     let numCount = 0;
 
-    buttonArray.map((button) => {
+    //add event listener to number buttons so that when a number is clicked,
+    //it shows up on the display after the previous numbers, and if 0 is the only number there,
+    //0 gets replaced by the number clicked.
+    //max characters on screen is 12;
+
+    numButtonArray.map((button) => {
         button.addEventListener("click", () => {
             if (numCount != 12) {
                 if (display.textContent === "0") {
@@ -46,6 +51,11 @@ function addEventListenersToButtons() {
             }
         });
     });
+
+    const clearButton = document.querySelector("#clear");
+    clearButton.addEventListener("click", () => { display.textContent = "0" });
+
+
 
 
 }

@@ -32,13 +32,21 @@ function operate(num1, num2, operator) {
 
 function addEventListenersToButtons() {
 
-    const numButtons = document.querySelectorAll(".number-button");
-    const numButtonArray = Array.from(numButtons);
-    const display = document.querySelector("#calculator-screen");
-    let numCount = 0;
+
+
+    const allButtons = document.querySelectorAll(".button");
+    const allButtonArray = Array.from(allButtons);
+    allButtonArrayWOOps = allButtonArray.filter((button) => {
+        return !(button.textContent === '-' || button.textContent === '+' || button.textContent === '/' || button.textContent === 'x');
+    });
+    allButtonArrayWOOps.map((button) => {
+        button.addEventListener("mousedown", () => { button.style.backgroundColor = "#c7dce4"; });
+        button.addEventListener("mouseup", () => { button.style.backgroundColor = "#add7e6"; });
+
+    })
 
     //indicates a number button was clicked
-    let numButtonClicked=false;
+    let numButtonClicked = false;
 
     //add event listener to number buttons so that when a number is clicked,
     //it shows up on the display after the previous numbers, and if 0 is the only number there,
@@ -47,9 +55,14 @@ function addEventListenersToButtons() {
     //if buttonClicked is true, that means an operator button was entered, so by clicking a number,
     //this changes the operator button to its original color
 
+    const numButtons = document.querySelectorAll(".number-button");
+    const numButtonArray = Array.from(numButtons);
+    const display = document.querySelector("#calculator-screen");
+    let numCount = 0;
+
     numButtonArray.map((button) => {
         button.addEventListener("click", () => {
-            numButtonClicked=true;
+            numButtonClicked = true;
             if (numCount != 12) {
                 if (display.textContent === "0") {
                     display.textContent = "";
@@ -64,8 +77,8 @@ function addEventListenersToButtons() {
         });
     });
 
-    let num1;
-    let operator;
+    let num1=null;
+    let operator=null;
     let num2 = null;
     let buttonClicked = false;
 
@@ -82,14 +95,14 @@ function addEventListenersToButtons() {
             buttonClicked = true;
             divideButton.style.backgroundColor = "#c7dce4";
             num1 = null;
-        } else if (numButtonClicked){
+        } else if (numButtonClicked) {
             operator = "/"
             num1 = +display.textContent;
             buttonClicked = true;
             divideButton.style.backgroundColor = "#c7dce4";
             num2 = null;
         }
-        numButtonClicked=false;
+        numButtonClicked = false;
     });
 
     //event listener for equals button
@@ -101,17 +114,24 @@ function addEventListenersToButtons() {
         if (num2 === null) {
             num2 = +display.textContent;
             display.textContent = operate(num1, num2, operator);
-            num1=null;
+            num1 = null;
         } else {
             num1 = display.textContent
             display.textContent = operate(num1, num2, operator);
         }
+        divideButton.style.backgroundColor = "#add7e6";
     });
 
 
     //clears display
     const clearButton = document.querySelector("#clear");
-    clearButton.addEventListener("click", () => { display.textContent = "0" });
+    clearButton.addEventListener("click", () => {
+        num1=null;
+        operator=null;
+        num2=null;
+        display.textContent = "0"; 
+        divideButton.style.backgroundColor = "#add7e6";
+    });
 
 
 

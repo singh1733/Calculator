@@ -1,15 +1,29 @@
-function add(a, b) {
-    return a + b;
+function add(num1, num2) {
+    return num1 + num2;
 }
 
-function subtract(a, b) {
-    return a - b;
+function subtract(num1, num2) {
+    return num1 - num2;
 }
 
-function multiply(a,b){
-    return a*b;
+function multiply(num1,num2){
+    return num1*num2;
 } 
 
-function divide(a,b){
-    return a/b;
+function divide(num1,num2){
+    return num1/num2;
+}
+
+let num1, num2, operator, result;
+
+function operate(num1,num2, operator){
+    if (operator=="/"){
+        result=divide(num1,num2);
+    }else if (operator=="*"){
+        result=multiply(num1,num2);
+    }else if (operator=="+"){
+        result=add(num1,num2);
+    }else if(operator=="-"){
+        result=subtract(num1,num2);
+    }
 }

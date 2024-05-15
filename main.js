@@ -30,6 +30,8 @@ function operate(num1, num2, operator) {
     }
 }
 
+ 
+
 function addEventListenersToButtons() {
 
 
@@ -66,10 +68,14 @@ function addEventListenersToButtons() {
             if (numCount != 12) {
                 if (display.textContent === "0") {
                     display.textContent = "";
-                } else if (buttonClicked === true) {
+                } else if (divideButtonClicked === true) {
                     display.textContent = "";
                     divideButton.style.backgroundColor = "#add7e6";
-                    buttonClicked = false;
+                    divideButtonClicked = false;
+                }else if (multiplyButtonClicked === true){
+                    display.textContent = "";
+                    multiplyButton.style.backgroundColor = "#add7e6";
+                    multiplyButtonClicked = false;
                 }
                 display.textContent += button.textContent;
                 numCount++;
@@ -80,7 +86,11 @@ function addEventListenersToButtons() {
     let num1=null;
     let operator=null;
     let num2 = null;
-    let buttonClicked = false;
+
+    let divideButtonClicked = false;
+    let multiplyButtonClicked = false;
+    let addButtonClicked = false;
+    let subtractButtonClicked = false;
 
     //event listener for divide button
     //num2=null so the equals button knows to not use the previous output (6/2/2=1.5)
@@ -92,14 +102,32 @@ function addEventListenersToButtons() {
         if (typeof num1 === "number" && numButtonClicked) {
             num2 = +display.textContent;
             display.textContent = operate(num1, num2, operator);
-            buttonClicked = true;
+            divideButtonClicked = true;
             divideButton.style.backgroundColor = "#c7dce4";
             num1 = null;
         } else if (numButtonClicked) {
             operator = "/"
             num1 = +display.textContent;
-            buttonClicked = true;
+            divideButtonClicked = true;
             divideButton.style.backgroundColor = "#c7dce4";
+            num2 = null;
+        }
+        numButtonClicked = false;
+    });
+
+    const multiplyButton = document.querySelector("#multiply");
+    multiplyButton.addEventListener("click", () => {
+        if (typeof num1 === "number" && numButtonClicked) {
+            num2 = +display.textContent;
+            display.textContent = operate(num1, num2, operator);
+            multiplyButtonClicked = true;
+            multiplyButton.style.backgroundColor = "#c7dce4";
+            num1 = null;
+        } else if (numButtonClicked) {
+            operator = "*"
+            num1 = +display.textContent;
+            multiplyButtonClicked = true;
+            multiplyButton.style.backgroundColor = "#c7dce4";
             num2 = null;
         }
         numButtonClicked = false;

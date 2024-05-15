@@ -17,25 +17,30 @@ function divide(num1, num2) {
 let num1, num2, operator, result;
 
 function operate(num1, num2, operator) {
+    let res;
     if (operator == "/") {
-        return divide(num1, num2);
+        res= divide(num1, num2);
     } else if (operator == "*") {
-        return multiply(num1, num2);
+        res= multiply(num1, num2);
     } else if (operator == "+") {
-        return add(num1, num2);
+        res= add(num1, num2);
     } else if (operator == "-") {
-        return subtract(num1, num2);
+        res= subtract(num1, num2);
     } else {
-        return num2;
+        res= num2;
     }
+
+    if (res.toString().length>=12){
+        res=res.toExponential(6);
+    }
+    return res;
 }
 
 function buttonSwitch(divideButton, multiplyButton, addButton, subtractButton) {
     divideButton.style.backgroundColor = "#add7e6";
     multiplyButton.style.backgroundColor = "#add7e6";
-    addButton.style.backgroundColor = "#add7e6"
-    subtractButton.style.backgroundColor = "#add7e6"
-    return;
+    addButton.style.backgroundColor = "#add7e6";
+    subtractButton.style.backgroundColor = "#add7e6";
 }
 
 function addEventListenersToButtons() {
@@ -74,17 +79,17 @@ function addEventListenersToButtons() {
     numButtonArray.map((button) => {
         button.addEventListener("click", () => {
             numButtonClicked = true;
-            //if (numCount != 12) {
+            if (numCount != 12) {
                 if (display.textContent === "0") {
                     display.textContent = "";
                 } else if (opButtonClicked.includes(true)) {
                     display.textContent = "";
                     buttonSwitch(divideButton, multiplyButton, addButton, subtractButton);
-                    opButtonClicked.map((op) => {op = false});
+                    opButtonClicked=opButtonClicked.map((op) => {op = false});
                 }
                 display.textContent += button.textContent;
                 numCount++;
-           // }
+            }
         });
     });
 
